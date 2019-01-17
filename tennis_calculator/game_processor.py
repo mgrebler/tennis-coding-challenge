@@ -1,6 +1,6 @@
 from collections import namedtuple
 
-GameResult = namedtuple('GameResult', ['winner', 'person_0_score', 'person_1_score', 'remaining_points'])
+GameResult = namedtuple('GameResult', ['winner', 'person_0_score', 'person_1_score'])
 
 def process_game(points):
     p0 = 0
@@ -17,7 +17,7 @@ def process_game(points):
 
         if abs(p0 - p1) > 1:
             if p0 > 3:
-                return GameResult(0, p0, p1, points)
+                return GameResult(0, p0, p1), points
 
             if p1 > 3:
-                return GameResult(1, p0, p1, points)
+                return GameResult(1, p0, p1), points
