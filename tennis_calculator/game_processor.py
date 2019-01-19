@@ -25,11 +25,8 @@ class GameProcessor:
                 raise ValueError("Points must be 1 or 0")
 
             if abs(p0 - p1) > 1:
-                if p0 >= self.max_points:
-                    return GameResult(0, p0, p1), points
-
-                if p1 >= self.max_points:
-                    return GameResult(1, p0, p1), points
+                if p0 >= self.max_points or p1 >= self.max_points:
+                    return GameResult(p, p0, p1), points
 
         return GameResult(None, p0, p1), points
 

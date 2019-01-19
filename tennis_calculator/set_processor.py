@@ -34,11 +34,7 @@ def process_set(points):
             g1 += 1
 
         if abs(g0 - g1) > 1:
-
-            if g0 >= 6:
-                return SetResult(0, g0, g1), remaining_points
-
-            if g1 >= 6:
-                return SetResult(1, g0, g1), remaining_points
+            if g0 >= 6 or g1 >= 6:
+                return SetResult(result.winner, g0, g1), remaining_points
 
     return SetResult(None, g0, g1), remaining_points
