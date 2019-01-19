@@ -2,10 +2,7 @@ from collections import namedtuple
 
 from tennis_calculator import game_processor
 
-from tennis_calculator.game_processor import process_game
-
 SetResult = namedtuple('SetResult', ['winner', 'person_0_games', 'person_1_games'])
-
 
 def handle_tiebreaker(points):
     result, remaining_points = game_processor.process_tiebreaker(points)

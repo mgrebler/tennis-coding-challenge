@@ -1,39 +1,52 @@
 from unittest import TestCase
 
-from tennis_calculator.game_processor import process_game, GameResult
+from tennis_calculator.game_processor import GameResult, GameProcessor, process_game, NORMAL_GAME_POINTS, \
+    TIE_BREAK_POINTS, process_tiebreaker
 
 
 class TestGameProcessor(TestCase):
 
+    def setUp(self):
+        self.game_processor = GameProcessor(4)
+
     def test_p0_wins(self):
-        result, _ = process_game([0,0,0,0])
-        self.assertEqual(result.winner, 0)
+        result, _ = self.game_processor.process_game([0,0,0,0])
+        self.assertEqual(0, result.winner)
 
     def test_p1_wins(self):
-        result, _ = process_game([1,1,1,1])
-        self.assertEqual(result.winner, 1)
+        result, _ = self.game_processor.process_game([1,1,1,1])
+        self.assertEqual(1, result.winner)
 
     def test_no_remaining_points_for_complete_game(self):
-        _, remaining = process_game([0,0,0,0])
+        _, remaining = self.game_processor.process_game([0,0,0,0])
         self.assertFalse(remaining)
 
     def test_scores(self):
-        result, _ = process_game([1,0,1,0,0,0])
-        self.assertEqual(result.person_0_score, 4)
-        self.assertEqual(result.person_1_score, 2)
+        result, _ = self.game_processor.process_game([1,0,1,0,0,0])
+        self.assertEqual(4, result.person_0_score)
+        self.assertEqual(2, result.person_1_score)
 
     def test_advantage_win(self):
-        result, _ = process_game([1,0,1,0,1,0,1,1])
-        self.assertEquals(result, GameResult(1,3,5))
+        result, _ = self.game_processor.process_game([1,0,1,0,1,0,1,1])
+        self.assertEquals(GameResult(1,3,5), result)
 
     def test_remaining_games(self):
-        _, remaining = process_game([0,0,0,0,1,0])
-        self.assertListEqual(remaining, [1,0])
+        _, remaining = self.game_processor.process_game([0,0,0,0,1,0])
+        self.assertListEqual([1,0], remaining)
 
     def test_incomplete_game(self):
-        result, _ = process_game([0,0,0])
-        self.assertEquals(result, GameResult(None,3,0))
-
+        result, _ = self.game_processor.process_game([0,0,0])
+        self.assertEquals(GameResult(None,3,0), result)
 
     def test_invalid_input(self):
-        self.assertRaises(ValueError, process_game, [2])
+        self.assertRaises(ValueError, self.game_processor.process_game, [2])
+
+    def test_handles_regular_game(self):
+        result, remaining = process_game([0] * NORMAL_GAME_POINTS)
+        self.assertEqual(0, result.winner)
+        self.assertFalse(remaining)
+
+    def test_handles_tie_breaker(self):
+        result, remaining = process_tiebreaker([0] * TIE_BREAK_POINTS)
+        self.assertEqual(0, result.winner)
+        self.assertFalse(remaining)

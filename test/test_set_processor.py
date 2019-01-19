@@ -8,12 +8,17 @@ from tennis_calculator.set_processor import process_set, SetResult
 P0_GAME = (GameResult(0, 4, 1), [1])
 P1_GAME = (GameResult(1, 0, 4), [1])
 
-
 class TestGameProcessor(TestCase):
 
     def setUp(self):
+        self.tmp_process_game = game_processor.process_game
+        self.tmp_process_tiebreaker = game_processor.process_tiebreaker
         game_processor.process_game = mock.Mock()
         game_processor.process_tiebreaker = mock.Mock()
+
+    def tearDown(self):
+        game_processor.process_game = self.tmp_process_game
+        game_processor.process_tiebreaker = self.tmp_process_tiebreaker
 
     def test_p0_wins(self):
 
