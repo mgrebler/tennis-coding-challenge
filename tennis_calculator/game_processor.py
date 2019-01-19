@@ -21,3 +21,5 @@ def process_game(points):
 
             if p1 > 3:
                 return GameResult(1, p0, p1), points
+
+    return GameResult(None, p0, p1), points

@@ -30,5 +30,10 @@ class TestGameProcessor(TestCase):
         _, remaining = process_game([0,0,0,0,1,0])
         self.assertListEqual(remaining, [1,0])
 
+    def test_incomplete_game(self):
+        result, _ = process_game([0,0,0])
+        self.assertEquals(result, GameResult(None,3,0))
+
+
     def test_invalid_input(self):
         self.assertRaises(ValueError, process_game, [2])
