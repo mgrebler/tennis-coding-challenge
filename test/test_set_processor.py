@@ -3,12 +3,12 @@ import mock
 
 from tennis_calculator import game_processor
 from tennis_calculator.game_processor import GameResult
-from tennis_calculator.set_processor import process_set, SetResult
+from tennis_calculator.set_processor import process_set, SetResult, process_final_set
 
 P0_GAME = (GameResult(0, 4, 1), [1])
 P1_GAME = (GameResult(1, 0, 4), [1])
 
-class TestGameProcessor(TestCase):
+class TestSetProcessor(TestCase):
 
     def setUp(self):
         self.tmp_process_game = game_processor.process_game
@@ -26,7 +26,7 @@ class TestGameProcessor(TestCase):
 
         result, _ = process_set([0])
 
-        self.assertEqual(result.winner, 0)
+        self.assertEqual(0, result.winner)
 
     def test_p1_wins(self):
 
@@ -34,7 +34,7 @@ class TestGameProcessor(TestCase):
 
         result, _ = process_set([0])
 
-        self.assertEqual(result.winner, 1)
+        self.assertEqual(1, result.winner)
 
     def test_scores_correct(self):
 
@@ -42,8 +42,8 @@ class TestGameProcessor(TestCase):
 
         result, _ = process_set([0])
 
-        self.assertEqual(result.person_0_games, 1)
-        self.assertEqual(result.person_1_games, 6)
+        self.assertEqual(1, result.person_0_games)
+        self.assertEqual(6, result.person_1_games)
 
     def test_7_5_game(self):
 
@@ -53,8 +53,8 @@ class TestGameProcessor(TestCase):
         result, _ = process_set([0])
 
         self.assertEqual(0, result.winner)
-        self.assertEqual(result.person_0_games, 7)
-        self.assertEqual(result.person_1_games, 5)
+        self.assertEqual(7, result.person_0_games)
+        self.assertEqual(5, result.person_1_games)
 
 
     def test_tie_break_p0_win(self):
@@ -97,3 +97,13 @@ class TestGameProcessor(TestCase):
 
         self.assertEqual(SetResult(None, 0, 0), result)
         self.assertFalse(remaining)
+
+    def test_final_set(self):
+
+        game_processor.process_game.side_effect = \
+            [P0_GAME] * 5 + [P1_GAME] * 6 + [P0_GAME, P1_GAME, P1_GAME]
+
+        result, _ = process_final_set([0])
+
+        self.assertEqual(SetResult(1, 6, 8), result)
+
