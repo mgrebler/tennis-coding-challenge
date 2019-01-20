@@ -2,8 +2,8 @@ from unittest import TestCase
 
 import mock
 
-from tennis_calculator import set_processor
-from tennis_calculator.match_processor import MatchProcessor
+from tennis_calculator.processing import set_processor
+from tennis_calculator.processing.match_processor import MatchProcessor
 from tennis_calculator.results.results import SetResult, MatchResult
 
 P0_SET = SetResult(0, 6, 0), [0]

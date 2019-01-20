@@ -1,6 +1,6 @@
 import re
 
-from tennis_calculator import match_processor
+from tennis_calculator.processing import match_processor
 from tennis_calculator.results.results import NamedMatchResult
 
 

@@ -1,4 +1,4 @@
-from tennis_calculator import game_processor
+from tennis_calculator.processing import game_processor
 from tennis_calculator.results.results import SetResult
 
 

@@ -3,9 +3,9 @@ from unittest import TestCase
 
 import mock
 
-from tennis_calculator import match_processor
+from tennis_calculator.processing import match_processor
+from tennis_calculator.processing.tournament_parser import parse_tournament
 from tennis_calculator.results.results import NamedMatchResult, MatchResult
-from tennis_calculator.tournament_parser import parse_tournament
 
 MATCH_RESULT = MatchResult(0, 2, 0)
 
