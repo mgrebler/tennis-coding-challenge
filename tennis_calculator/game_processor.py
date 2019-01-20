@@ -1,6 +1,4 @@
-from collections import namedtuple
-
-GameResult = namedtuple('GameResult', ['winner', 'person_0_score', 'person_1_score'])
+from tennis_calculator.results.results import GameResult
 
 NORMAL_GAME_POINTS = 4
 TIE_BREAK_POINTS = 7

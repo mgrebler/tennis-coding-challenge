@@ -2,8 +2,8 @@ from unittest import TestCase
 import mock
 
 from tennis_calculator import game_processor
-from tennis_calculator.game_processor import GameResult
-from tennis_calculator.set_processor import process_set, SetResult, process_final_set
+from tennis_calculator.results.results import GameResult, SetResult
+from tennis_calculator.set_processor import process_set, process_final_set
 
 P0_GAME = (GameResult(0, 4, 1), [1])
 P1_GAME = (GameResult(1, 0, 4), [1])

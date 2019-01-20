@@ -1,7 +1,8 @@
 from unittest import TestCase
 
-from tennis_calculator.game_processor import GameResult, GameProcessor, process_game, NORMAL_GAME_POINTS, \
+from tennis_calculator.game_processor import GameProcessor, process_game, NORMAL_GAME_POINTS, \
     TIE_BREAK_POINTS, process_tiebreaker
+from tennis_calculator.results.results import GameResult
 
 
 class TestGameProcessor(TestCase):

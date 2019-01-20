@@ -44,7 +44,8 @@ For processing, blank lines must be ignored, and can **not** be relied upon to i
 
 ## Queries
 
-### Query scores for a particular match
+### Query match result
+Query scores for a particular match
 Prints who defeated whom, and the result of the sets for the match (winning player score first).
 
 Query: `Score Match <id>`
@@ -77,6 +78,15 @@ Example output:
     0 1 1 Person F
 
 
+### Query games for player
+Prints a summary of games won vs lost for a particular player over the tournament
+Query: `Games Player <Player Name>`
+
+Example: `Games Player Person A`
+
+Example output:
+
+    37 56
 
 ## Scoring Rules
 Details of tennis scoring can be found online. 

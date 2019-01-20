@@ -1,8 +1,5 @@
-from collections import namedtuple
-
 from tennis_calculator import game_processor
-
-SetResult = namedtuple('SetResult', ['winner', 'person_0_games', 'person_1_games'])
+from tennis_calculator.results.results import SetResult
 
 
 def process_final_set(points):
