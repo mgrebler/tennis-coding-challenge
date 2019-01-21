@@ -6,10 +6,10 @@ from tennis_calculator.processing import set_processor
 from tennis_calculator.processing.match_processor import MatchProcessor
 from tennis_calculator.results.results import SetResult, MatchResult
 
-P0_SET = SetResult(0, 6, 0), [0]
-P1_SET = SetResult(1, 0, 6), [0]
-P0_FINISH_SET = SetResult(0, 6, 0), []
-P1_FINISH_SET = SetResult(1, 0, 6), []
+P0_SET = SetResult(0, 6, 0, []), [0]
+P1_SET = SetResult(1, 0, 6, []), [0]
+P0_FINISH_SET = SetResult(0, 6, 0, []), []
+P1_FINISH_SET = SetResult(1, 0, 6, []), []
 
 class TestMatchProcessor(TestCase):
 
@@ -47,7 +47,19 @@ class TestMatchProcessor(TestCase):
 
         result = self.match_processor.process_match([0])
 
-        self.assertEqual(MatchResult(1,1,3), result)
+        self.assertEqual(1, result.person_0_sets)
+        self.assertEqual(3, result.person_1_sets)
+
+    def test_set_results(self):
+
+        set_results_with_points = [P0_SET] + [P1_SET] * 2 + [P1_FINISH_SET]
+        set_processor.process_set.side_effect = set_results_with_points
+
+        result = self.match_processor.process_match([0])
+
+        expected = list(map(lambda x: x[0], set_results_with_points))
+
+        self.assertEqual(expected, result.set_results)
 
     def test_final_set(self):
 
@@ -56,17 +68,21 @@ class TestMatchProcessor(TestCase):
 
         result = self.match_processor.process_match([0])
 
-        self.assertEqual(MatchResult(1,2,3), result)
+        self.assertEqual(1, result.winner)
+        self.assertEqual(2, result.person_0_sets)
+        self.assertEqual(3, result.person_1_sets)
 
     def test_incomplete_match(self):
         set_processor.process_set.return_value = P0_FINISH_SET
 
         result = self.match_processor.process_match([0])
 
-        self.assertEqual(MatchResult(None, 1, 0), result)
+        self.assertEqual(MatchResult(None, 1, 0, [P0_FINISH_SET[0]]), result)
 
     def test_complete_match_ignores_excess_points(self):
         set_processor.process_set.side_effect = [P0_SET] * 3
 
-        self.match_processor.process_match([0])
+        result = self.match_processor.process_match([0])
+
+        self.assertEqual(3, result.person_0_sets)
 

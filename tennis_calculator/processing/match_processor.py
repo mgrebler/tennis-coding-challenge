@@ -10,6 +10,7 @@ class MatchProcessor:
 
     def process_match(self, points):
         remaining_points = points
+        set_results = []
 
         s0 = 0
         s1 = 0
@@ -21,15 +22,17 @@ class MatchProcessor:
             else:
                 result, remaining_points = set_processor.process_set(remaining_points)
 
+            set_results.append(result)
+
             if result.winner == 0:
                 s0 += 1
             if result.winner == 1:
                 s1 += 1
 
             if s0 == self.max_sets or s1 == self.max_sets:
-                return MatchResult(result.winner, s0, s1)
+                return MatchResult(result.winner, s0, s1, set_results)
 
-        return MatchResult(None, s0, s1)
+        return MatchResult(None, s0, s1, set_results)
 
 
 def process_womens_match(points):

@@ -7,7 +7,7 @@ from tennis_calculator.processing import match_processor
 from tennis_calculator.processing.tournament_parser import parse_tournament
 from tennis_calculator.results.results import NamedMatchResult, MatchResult
 
-MATCH_RESULT = MatchResult(0, 2, 0)
+MATCH_RESULT = MatchResult(0, 2, 0, [])
 
 class TestTournamentParser(TestCase):
 
@@ -33,7 +33,8 @@ Player A vs Player B
 """)
 
         result = parse_tournament(file)
-        self.assertEqual([NamedMatchResult("01", "Player A", "Player B", MATCH_RESULT)], result)
+        expected = { "01": NamedMatchResult("01", "Player A", "Player B", MATCH_RESULT) }
+        self.assertEqual(expected, result)
 
     def test_parses_multiple_matches(self):
         match_processor.process_womens_match.return_value = MATCH_RESULT
@@ -47,8 +48,8 @@ Player C vs Player D
 """)
 
         result = parse_tournament(file)
-        expected = [NamedMatchResult("01", "Player A", "Player B", MATCH_RESULT),
-                    NamedMatchResult("02", "Player C", "Player D", MATCH_RESULT)]
+        expected = { "01": NamedMatchResult("01", "Player A", "Player B", MATCH_RESULT),
+                     "02": NamedMatchResult("02", "Player C", "Player D", MATCH_RESULT) }
         self.assertEqual(expected, result)
 
     def test_invalid_match(self):

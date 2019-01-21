@@ -5,9 +5,7 @@ from tennis_calculator.results.results import NamedMatchResult
 
 
 def parse_tournament(file):
-    results = []
-
-    # with open(file) as f:
+    results = {}
 
     match_id = None
     player_0 = None
@@ -25,12 +23,12 @@ def parse_tournament(file):
         elif line == "0" or line == "1":
             points.append(int(line))
         else:
-            results.append(_match_complete(match_id, player_0, player_1, points))
+            results[match_id] = _match_complete(match_id, player_0, player_1, points)
             match_id = _parse_match(line)
             player_0, player_1 = None, None
             points = []
 
-    results.append(_match_complete(match_id, player_0, player_1, points))
+    results[match_id] = _match_complete(match_id, player_0, player_1, points)
 
     return results
 

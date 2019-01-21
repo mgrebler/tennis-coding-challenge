@@ -45,6 +45,17 @@ class TestSetProcessor(TestCase):
         self.assertEqual(1, result.person_0_games)
         self.assertEqual(6, result.person_1_games)
 
+    def test_game_results_stored(self):
+
+        game_results_with_remaining_points = [P0_GAME] + [P1_GAME] * 6
+        game_processor.process_game.side_effect = game_results_with_remaining_points
+
+        result, _ = process_set([0])
+
+        expected_game_results = list(map(lambda x: x[0], game_results_with_remaining_points))
+
+        self.assertEqual(expected_game_results, result.game_results)
+
     def test_7_5_game(self):
 
         game_processor.process_game.side_effect = \
@@ -66,7 +77,9 @@ class TestSetProcessor(TestCase):
 
         result, _ = process_set([0])
 
-        self.assertEqual(SetResult(0, 7, 6), result)
+        self.assertEqual(0, result.winner)
+        self.assertEqual(7, result.person_0_games)
+        self.assertEqual(6, result.person_1_games)
 
     def test_tie_break_p1_win(self):
 
@@ -77,25 +90,29 @@ class TestSetProcessor(TestCase):
 
         result, _ = process_set([0])
 
-        self.assertEqual(SetResult(1, 6, 7), result)
+        self.assertEqual(1, result.winner)
+        self.assertEqual(6, result.person_0_games)
+        self.assertEqual(7, result.person_1_games)
 
 
     def test_incomplete_set(self):
 
-        game_processor.process_game.return_value = (GameResult(0, 4 ,0), [])
+        game_result = GameResult(0, 4, 0)
+        game_processor.process_game.return_value = (game_result, [])
 
         result, remaining = process_set([0])
 
-        self.assertEqual(SetResult(None, 1, 0), result)
+        self.assertEqual(SetResult(None, 1, 0, [game_result]), result)
         self.assertFalse(remaining)
 
     def test_incomplete_game_within_a_set(self):
 
-        game_processor.process_game.return_value = (GameResult(None, 1 ,0), [])
+        game_result = GameResult(None, 1, 0)
+        game_processor.process_game.return_value = (game_result, [])
 
         result, remaining = process_set([0])
 
-        self.assertEqual(SetResult(None, 0, 0), result)
+        self.assertEqual(SetResult(None, 0, 0, [game_result]), result)
         self.assertFalse(remaining)
 
     def test_final_set(self):
@@ -105,5 +122,7 @@ class TestSetProcessor(TestCase):
 
         result, _ = process_final_set([0])
 
-        self.assertEqual(SetResult(1, 6, 8), result)
+        self.assertEqual(1, result.winner)
+        self.assertEqual(6, result.person_0_games)
+        self.assertEqual(8, result.person_1_games)
 
