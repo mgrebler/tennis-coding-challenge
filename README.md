@@ -55,6 +55,7 @@ Example: `Score Match 01`
 Example output:
 
     Person A defeated Person B
+    2 sets to 1
     6 1
     4 6
     8 6
