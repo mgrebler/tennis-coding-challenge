@@ -62,25 +62,6 @@ Example output:
     4 6
     8 6
  
-### Query tournament summary results
-Prints the sorted ladder for the tournament. On each line it shows:
-* Number of match wins
-* Number of match losses
-* Number of "no result" matches.
-
-
-Query: `Tournament summary`
-
-Example output:
-
-    4 0 0 Person A
-    3 1 0 Person B
-    2 1 1 Person C
-    2 2 0 Person D
-    0 0 1 Person E
-    0 1 1 Person F
-
-
 ### Query games for player
 Prints a summary of games won vs lost for a particular player over the tournament
 Query: `Games Player <Player Name>`
@@ -90,6 +71,24 @@ Example: `Games Player Person A`
 Example output:
 
     37 56
+
+## Sample output
+Running the application against the 'full_tournament.txt' file results in the following:
+
+    $ python tennis_calculator_app.py test/test_data/full_tournament.txt << EOF
+    Score Match 02
+    Games Player Person A
+    EOF
+    
+    Person A defeated Person C
+    2 sets to 1
+    7 6
+    0 6
+    8 6
+    
+    27 18
+    
+
 
 ## Scoring Rules
 Details of tennis scoring can be found online. See here for reference:  
