@@ -1,8 +1,3 @@
-TODO
-- sample file with input and expected output.
-- Fully specify the scoring system.
-- Remove Tournament summary query?
-
 # Tennis Calculator
 
 The tennis calculator takes a set of scores as inputs and produces useful statistics based on those scores.
@@ -13,11 +8,7 @@ The Tennis Calculator takes inputs in the form of a list of points of a tennis m
 
 Given this list of points, it will calculate the "games", "sets" and "matches" results.
 
-From there it can be queried about various statictics around the input matches it received. 
-For example:
-* Who won the most matches
-* What was the result of a particular match
-* Which game went for the most points
+From there it can be queried about various statistics around the input matches it received. 
 
 ## Input
 
@@ -40,6 +31,23 @@ For example:, the following would result in 2 games to "Person A":
     
 The first row is a match id, the second row shows who is playing against whom.
 After that are a series of points, where 0 is a point for the first person listed, 1 is for last person.
+
+i.e.
+
+| Input                | Score   |
+|----------------------|---------|
+| Match: 01            |         |
+| Person A vs Person B |         |
+| 0                    | 15 - 0  |
+| 1                    | 15 - 15 |
+| 0                    | 30 - 15 |
+| 1                    | 30 - 30 |
+| 0                    | 40 - 30 |
+| 0                    | Game    |
+| 0                    | 15 - 0  |
+| 0                    | 30 - 0  |
+| 0                    | 40 - 0  |
+| 0                    | Game    |
 
 
 For processing, blank lines must be ignored

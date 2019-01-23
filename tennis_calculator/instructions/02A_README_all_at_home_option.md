@@ -21,7 +21,7 @@ We also expect you to create a short readme file briefly explaining your solutio
 
 The application must only include the standard python libraries (i.e. no external dependencies can be used).
 
-Your tests can incude whatever dependencies you want.
+Your tests can include whatever dependencies you want.
 
 Attached are the README.md file, explaining the application, and a txt file with sample input.
 
