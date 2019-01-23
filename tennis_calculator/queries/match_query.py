@@ -1,3 +1,12 @@
+import re
+
+
+def get_match_id(query_string):
+    m = re.match("Score Match (?P<match_id>.*$)", query_string)
+    if m:
+        return m.group('match_id')
+
+
 def query_match(match_id, results):
     match = results.get(match_id)
 
@@ -9,7 +18,6 @@ def query_match(match_id, results):
 
 def _print_match(match):
     match_result = match.match_result
-    print match_result
     winner = match_result.winner
 
     player_names = (match.person_0_name, match.person_1_name)

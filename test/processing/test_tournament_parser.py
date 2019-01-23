@@ -26,11 +26,13 @@ class TestTournamentParser(TestCase):
 
     def test_parses_single_match(self):
         match_processor.process_womens_match.return_value = MATCH_RESULT
-        file = self.set_tournament_content("""
-Match: 01
-Player A vs Player B
-0
-""")
+        file = self.set_tournament_content(
+            """
+            Match: 01
+            Player A vs Player B
+            0
+            """
+        )
 
         result = parse_tournament(file)
         expected = { "01": NamedMatchResult("01", "Player A", "Player B", MATCH_RESULT) }
@@ -38,14 +40,16 @@ Player A vs Player B
 
     def test_parses_multiple_matches(self):
         match_processor.process_womens_match.return_value = MATCH_RESULT
-        file = self.set_tournament_content("""
-Match: 01
-Player A vs Player B
-0
-Match: 02
-Player C vs Player D
-0
-""")
+        file = self.set_tournament_content(
+            """
+            Match: 01
+            Player A vs Player B
+            0
+            Match: 02
+            Player C vs Player D
+            0
+            """
+        )
 
         result = parse_tournament(file)
         expected = { "01": NamedMatchResult("01", "Player A", "Player B", MATCH_RESULT),
@@ -53,14 +57,17 @@ Player C vs Player D
         self.assertEqual(expected, result)
 
     def test_invalid_match(self):
-        file = self.set_tournament_content("""
-INVALID
-""")
+        file = self.set_tournament_content(
+            """
+            INVALID
+            """
+        )
         self.assertRaises(ValueError, parse_tournament, file)
 
     def test_invalid_players(self):
-        file = self.set_tournament_content("""
-Match: 01
-INVALID
-""")
+        file = self.set_tournament_content(
+            """
+            Match: 01
+            INVALID
+            """)
         self.assertRaises(ValueError, parse_tournament, file)

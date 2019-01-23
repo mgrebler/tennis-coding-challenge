@@ -31,7 +31,7 @@ class TestGameProcessor(TestCase):
         result, _ = self.game_processor.process_game([1,0,1,0,1,0,1,1])
         self.assertEquals(GameResult(1,3,5), result)
 
-    def test_remaining_games(self):
+    def test_remaining_points(self):
         _, remaining = self.game_processor.process_game([0,0,0,0,1,0])
         self.assertListEqual([1,0], remaining)
 

@@ -4,7 +4,7 @@ from tennis_calculator.processing import match_processor
 from tennis_calculator.results.results import NamedMatchResult
 
 
-def parse_tournament(file):
+def parse_tournament(score_file):
     results = {}
 
     match_id = None
@@ -12,7 +12,7 @@ def parse_tournament(file):
     player_1 = None
     points = []
 
-    for full_line in file:
+    for full_line in score_file:
         line = full_line.strip()
         if not line:
             continue

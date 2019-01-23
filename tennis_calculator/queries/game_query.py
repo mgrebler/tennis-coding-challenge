@@ -1,3 +1,12 @@
+import re
+
+
+def get_player_name(query_string):
+    m = re.match("Games Player (?P<player_name>.*$)", query_string)
+    if m:
+        return m.group('player_name')
+
+
 def query_games(player_name, results):
     games_for = 0
     games_against = 0
