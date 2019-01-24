@@ -63,7 +63,8 @@ class TestMatchProcessor(TestCase):
 
     def test_final_set(self):
 
-        set_processor.process_set.side_effect = [P0_SET] * 2 + [P1_SET] * 2
+        set_processor.process_set.side_effect = [P0_SET] * 2 + [P1_SET] * 2 + \
+                                                [P1_FINISH_SET]
         set_processor.process_final_set.side_effect = [P1_FINISH_SET]
 
         result = self.match_processor.process_match([0])
