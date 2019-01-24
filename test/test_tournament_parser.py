@@ -4,8 +4,8 @@ from unittest import TestCase
 import mock
 
 from tennis_calculator.processing import match_processor
-from tennis_calculator.processing.tournament_parser import parse_tournament
 from tennis_calculator.results.results import NamedMatchResult, MatchResult
+from tennis_calculator_app import parse_tournament
 
 MATCH_RESULT = MatchResult(0, 2, 0, [])
 
@@ -27,8 +27,7 @@ class TestTournamentParser(TestCase):
     def test_parses_single_match(self):
         match_processor.process_womens_match.return_value = MATCH_RESULT
         file = self.set_tournament_content(
-            """
-            Match: 01
+            """Match: 01
             Player A vs Player B
             0
             """
@@ -41,8 +40,7 @@ class TestTournamentParser(TestCase):
     def test_parses_multiple_matches(self):
         match_processor.process_womens_match.return_value = MATCH_RESULT
         file = self.set_tournament_content(
-            """
-            Match: 01
+            """Match: 01
             Player A vs Player B
             0
             Match: 02
