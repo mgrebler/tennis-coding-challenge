@@ -6,7 +6,10 @@ Note: This file should **NOT** be sent to the interviewee.
 * Switch to `pairing_challenge` branch
     * This branch has the new functionality from what the received initially
     * The `point_query` functionality does not exist in `master`
-* **Remove** the "instructions" directory and then zip up this repo 
+* **Remove** 
+    * The "instructions" directory 
+    * The .git directory 
+* Zip up what's left 
 * Send the zip to the candidate just before the start of the pairing challenge
 * Get them to unzip the new code and get it running again
 * Print out these notes for the interviewer
