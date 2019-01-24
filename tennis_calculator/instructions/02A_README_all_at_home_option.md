@@ -23,7 +23,7 @@ The application must only include the standard python libraries (i.e. no externa
 
 Your tests can include whatever dependencies you want.
 
-Attached are the README.md file, explaining the application, and a txt file with sample input.
+Attached are the README.md file, explaining the application, and a full_tournament.txt file with sample input.
 
 Best of luck.
 

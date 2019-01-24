@@ -7,10 +7,14 @@ from tennis_calculator.queries.match_query import get_match_id, query_match
 
 
 def main(args):
+    tournament_results = get_tournament_results(args)
+    process_queries(tournament_results)
+
+
+def get_tournament_results(args):
     score_file = get_score_file(args)
     tournament_results = parse_tournament(score_file)
-    process_queries(tournament_results)
-    # print tournament_results
+    return tournament_results
 
 
 def get_score_file(args):
@@ -31,7 +35,6 @@ def process_queries(tournament_results):
 
 
 def process_query(line, results):
-    # TODO change queries to be classes with same method names to determine if query is applicable
     player = get_player_name(line)
     match = get_match_id(line)
 
@@ -39,6 +42,9 @@ def process_query(line, results):
         print query_games(player, results)
     elif match:
         print query_match(match, results)
+    else:
+        print "Unrecognised query: %s" % line
+
 
 if __name__ == "__main__":
     main(sys.argv[1:])
