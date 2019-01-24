@@ -1,58 +1,68 @@
-import re
-
 from tennis_calculator.processing import match_processor
 from tennis_calculator.results.results import NamedMatchResult
 
 
 def parse_tournament(score_file):
-    results = {}
+    r, m, p0, p1, p = {}, None, None, None, [] # results, match, points, player 0, player 1
 
-    match_id = None
-    player_0 = None
-    player_1 = None
-    points = []
+    for l in score_file:
+        l_ = l.strip()
 
-    for full_line in score_file:
-        line = full_line.strip()
-        if not line:
+        lt = get_line_type(l_, m, p0)
+
+        if lt == "1st match line":
+            # check for the first match line.
+            if l_.find("Match: ") == 0:
+                m = l_[7:]
+            else:
+                # Raise value error if we don't find a match id
+                raise ValueError("Expected Match but found line: %s" % l_)
+        elif lt == "player line":
+            # Check for player vs player line
+            i = l_.find(" vs ")
+            if i > -1:
+                p0 = l_[:i]
+                p1 = l_[(i + 4):]
+            else:
+                # Raise value error if don't match player
+                raise ValueError("Expected player names but found line: %s" % l_)
+        elif lt == "player 0 point":
+            p.append(0)
+        elif lt == "player 1 point":
+            p.append(int(l_))
+        elif lt == "blank line":
+            # Ignore blank lines
             continue
-        if not match_id:
-            match_id = _parse_match(line)
-        elif not player_0:
-            player_0, player_1 = _parse_players(line)
-        elif line == "0" or line == "1":
-            points.append(int(line))
-        else:
-            results[match_id] = _match_complete(match_id, player_0, player_1, points)
-            match_id = _parse_match(line)
-            player_0, player_1 = None, None
-            points = []
+        elif lt == "match line":
+            r[m] = NamedMatchResult(m, p0, p1, match_processor.process_womens_match(p))
+            # Check for player vs player line
+            if l_.find("Match: ") == 0:
+                m = l_[len("Match: "):]
+            else:
+                # Raise value error if don't match player
+                raise ValueError("Expected Match but found line: %s" % l_)
 
-    results[match_id] = _match_complete(match_id, player_0, player_1, points)
+            p0, p1 = None, None
 
-    return results
+            p = []
 
+    r[m] = NamedMatchResult(m, p0, p1, match_processor.process_womens_match(p))
 
-def _match_complete(match_id, player_0, player_1, points):
-    match_result = match_processor.process_womens_match(points)
-    return NamedMatchResult(match_id, player_0, player_1, match_result)
+    return r
 
 
-def _parse_match(line):
-    m = re.match("Match: (?P<match_id>.*)", line)
-    if m:
-        match_id = m.group('match_id')
-        if match_id:
-            return match_id
-    raise ValueError("Expected Match but found line: %s" % line)
-
-def _parse_players(line):
-    m = re.match("(?P<player_0>.*) vs (?P<player_1>.*)", line)
-    if m:
-        player_0 = m.group('player_0')
-        player_1 = m.group('player_1')
-        if player_0 and player_1:
-            return player_0, player_1
-    raise ValueError("Expected player names but found line: %s" % line)
-
+def get_line_type(l_, m, p0):
+    if not m:
+        lt = "1st match line"
+    elif not p0:
+        lt = "player line"
+    elif l_ == "0":
+        lt = "player 0 point"
+    elif l_ == "1":
+        lt = "player 1 point"
+    elif not l_:
+        lt = "blank line"
+    else:
+        lt = "match line"
+    return lt
 
