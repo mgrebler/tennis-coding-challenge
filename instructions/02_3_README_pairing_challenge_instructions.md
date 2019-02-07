@@ -26,12 +26,12 @@ Ask how they went with their at-home warm-up challenge.
 
 1. Did they find the bug in `match_processor.py`
     * i.e. It should be:
-    * `if s0 == self.max_sets - 1 and s1 == self.max_sets:`
+    * `if s0 == self.max_sets - 1 and s1 == self.max_sets - 1:`
 1. Did they add update or add any tests for that functionality?
     * E.g. `test_match_processor.py` could check if `process_final_set` is called
     * E.g.2. `test_tennis_calculator_app.py` could use `full_tournament.txt`
 
-## Question 1 Notes (approx 20 min)
+## Question 1 Notes (approx 20 - 25 min)
 A bug has been introduced in `game_processor.py`
 
     return GameResult(None, p0, 1), points
@@ -54,13 +54,13 @@ Note that if they spend too much time looking in `point_query.py`, hint that the
    production.
 
 
-## Question 2 Notes (approx 40 min)
+## Question 2 Notes (approx 40 - 55 min)
 * How do they go about creating the new functionality?
    * What questions do they ask about the output?
    * Do they create tests first?
    * What does their code look like?
 
-## Question 3 Notes (approx 20 min)
+## Question 3 Notes (approx 20 - 25 min)
 
 **Part A:** 
 * What questions / assumptions do they have around the level of code quality for "production"?
@@ -72,5 +72,5 @@ Note that if they spend too much time looking in `point_query.py`, hint that the
 * How clean do they make it? 
 * How small do they split up the methods?
 
-## Finally (5 min)
+## Finally (10 min)
 Any other questions from the candidate?

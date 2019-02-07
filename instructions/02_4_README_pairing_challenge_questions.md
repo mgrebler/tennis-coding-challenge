@@ -15,7 +15,7 @@ Should result in
 
 But does not. Instead it results in:
 
-    `115 82`
+    `115 81`
 
 
 Please diagnose and fix the bug properly.
@@ -26,7 +26,8 @@ Now we need to enhance the functionality for our MVP.
 
 We need to add a new query:
 ### Query tournament summary results
-Prints the sorted ladder for the tournament. On each line it shows:
+Prints a summary list for all of the players in the tournament (sorted by player name). On each line it shows:
+* Player name
 * Number of match wins
 * Number of match losses
 * Number of "no result" matches.
@@ -36,12 +37,9 @@ Query: `Tournament summary`
 
 Example output:
 
-    4 0 0 Person A
-    3 1 0 Person B
-    2 1 1 Person C
-    2 2 0 Person D
-    0 0 1 Person E
-    0 1 1 Person F
+    Person A 4 0 0 
+    Person B 0 1 0
+    Person C 2 1 1
 
 # Question 3
 

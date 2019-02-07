@@ -9,7 +9,7 @@ class TennisCalculator(TestCase):
 
     @patch('sys.stdout')
     def test_simple_game_query(self, mock_stdout):
-        results = get_tournament_results(['test_data/simple_game.txt'])
+        results = get_tournament_results(['test/test_data/simple_game.txt'])
         process_query('Games Player Person A', results)
 
         expout = "2 0"
@@ -20,7 +20,7 @@ class TennisCalculator(TestCase):
 
     @patch('sys.stdout')
     def test_simple_match_query(self, mock_stdout):
-        results = get_tournament_results(['test_data/simple_game.txt'])
+        results = get_tournament_results(['test/test_data/simple_game.txt'])
         process_query('Score Match 01', results)
 
         expout = """Incomplete game: Person A vs Person B
@@ -33,7 +33,7 @@ class TennisCalculator(TestCase):
 
     @patch('sys.stdout')
     def test_complex_game_query(self, mock_stdout):
-        results = get_tournament_results(['test_data/full_tournament.txt'])
+        results = get_tournament_results(['test/test_data/full_tournament.txt'])
         process_query('Games Player Person B', results)
 
         expout = "0 12"
