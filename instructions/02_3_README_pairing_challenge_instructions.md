@@ -47,7 +47,7 @@ Note that if they spend too much time looking in `point_query.py`, hint that the
 * After finding the bug, do they create a failing test (or fix the broken test)?
    * Do they create the test before fixing the code?
 * Does the interviewer refactor anything on the way (or after finding and fixing the bug)?
-   * If they do refactor, do they ensure that RuleFactoryTest has adequate coverage first?
+   * If they do refactor, do they ensure that there is adequate coverage first?
    * It's not essential that they do refactor at this stage 
    (although some might do so just to make the code understandable, which you can encourage), 
    but take note of if they mention that it should be refactored given that it's going into 
