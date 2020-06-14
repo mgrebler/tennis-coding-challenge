@@ -39,18 +39,5 @@ def _print_match_results(winner, match_result):
     if winner == 1:
         sets_summary_counts = (match_result.person_1_sets, match_result.person_0_sets)
 
-    result = "%s sets to %s\n" % sets_summary_counts
-    result += _print_set_results(winner, match_result.set_results)
-    return result
-
-
-def _print_set_results(winner, set_results):
-    result = ""
-    for set in set_results:
-        set_scores = (set.person_0_games, set.person_1_games)
-        if winner == 1:
-            set_scores = (set.person_1_games, set.person_0_games)
-
-        result += "%s %s\n" % set_scores
-    return result
+    return "%s sets to %s\n" % sets_summary_counts
 

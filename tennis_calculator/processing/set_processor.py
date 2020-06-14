@@ -2,13 +2,7 @@ from tennis_calculator.processing import game_processor
 from tennis_calculator.results.results import SetResult
 
 
-def process_final_set(points):
-    return _process_any_set(points, False)
-
 def process_set(points):
-    return _process_any_set(points)
-
-def _process_any_set(points, is_tiebreak_needed = True):
     remaining_points = points
 
     g0 = 0
@@ -17,7 +11,7 @@ def _process_any_set(points, is_tiebreak_needed = True):
 
     while remaining_points:
 
-        if g0 == 6 and g1 == 6 and is_tiebreak_needed:
+        if g0 == 6 and g1 == 6:
             return _handle_tiebreaker(remaining_points, game_results)
 
         result, remaining_points = game_processor.process_game(remaining_points)

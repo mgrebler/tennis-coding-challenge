@@ -25,7 +25,6 @@ class TennisCalculator(TestCase):
 
         expout = """Incomplete game: Person A vs Person B
 0 sets to 0
-2 0
 """
         mock_stdout.write.assert_has_calls([
             mock.call(expout)

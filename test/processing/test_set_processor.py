@@ -2,7 +2,7 @@ from unittest import TestCase
 import mock
 
 from tennis_calculator.processing import game_processor
-from tennis_calculator.processing.set_processor import process_set, process_final_set
+from tennis_calculator.processing.set_processor import process_set
 from tennis_calculator.results.results import GameResult, SetResult
 
 P0_GAME = (GameResult(0, 4, 1), [1])
@@ -114,15 +114,4 @@ class TestSetProcessor(TestCase):
 
         self.assertEqual(SetResult(None, 0, 0, [game_result]), result)
         self.assertFalse(remaining)
-
-    def test_final_set(self):
-
-        game_processor.process_game.side_effect = \
-            [P0_GAME] * 5 + [P1_GAME] * 6 + [P0_GAME, P1_GAME, P1_GAME]
-
-        result, _ = process_final_set([0])
-
-        self.assertEqual(1, result.winner)
-        self.assertEqual(6, result.person_0_games)
-        self.assertEqual(8, result.person_1_games)
 

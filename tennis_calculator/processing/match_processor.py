@@ -17,10 +17,7 @@ class MatchProcessor:
 
         while remaining_points:
 
-            if s0 == self.max_sets - 1 and s1 == self.max_sets:
-                result, remaining_points = set_processor.process_final_set(remaining_points)
-            else:
-                result, remaining_points = set_processor.process_set(remaining_points)
+            result, remaining_points = set_processor.process_set(remaining_points)
 
             set_results.append(result)
 

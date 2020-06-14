@@ -15,15 +15,12 @@ class TestMatchProcessor(TestCase):
 
     def setUp(self):
         self.tmp_process_set = set_processor.process_set
-        self.tmp_process_final_set = set_processor.process_final_set
         set_processor.process_set = mock.Mock()
-        set_processor.process_final_set = mock.Mock()
 
         self.match_processor = MatchProcessor(3)
 
     def tearDown(self):
         set_processor.process_set = self.tmp_process_set
-        set_processor.process_final_set = self.tmp_process_final_set
 
     def test_p0_wins(self):
 
@@ -65,7 +62,6 @@ class TestMatchProcessor(TestCase):
 
         set_processor.process_set.side_effect = [P0_SET] * 2 + [P1_SET] * 2 + \
                                                 [P1_FINISH_SET]
-        set_processor.process_final_set.side_effect = [P1_FINISH_SET]
 
         result = self.match_processor.process_match([0])
 

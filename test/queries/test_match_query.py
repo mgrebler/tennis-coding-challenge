@@ -17,9 +17,6 @@ class TestMatchQuery(TestCase):
 
         expected = """p1 defeated p2
 2 sets to 1
-6 0
-1 6
-6 2
 """
         self.assertEqual(expected, output)
 
@@ -34,9 +31,6 @@ class TestMatchQuery(TestCase):
 
         expected = """p2 defeated p1
 2 sets to 1
-6 0
-1 6
-6 2
 """
         self.assertEqual(expected, output)
 
@@ -51,7 +45,6 @@ class TestMatchQuery(TestCase):
 
         expected = """Incomplete game: p1 vs p2
 0 sets to 0
-1 0
 """
         self.assertEqual(expected, output)
 

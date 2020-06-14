@@ -66,9 +66,6 @@ Example output:
 
     Person A defeated Person B
     2 sets to 1
-    6 1
-    4 6
-    8 6
  
 ### Query games for player
 Prints a summary of games won vs lost for a particular player over the tournament
@@ -90,9 +87,6 @@ Running the application against the 'full_tournament.txt' file results in the fo
     
     Person A defeated Person C
     2 sets to 1
-    7 6
-    0 6
-    8 6
     
     27 18
     
@@ -101,13 +95,12 @@ Running the application against the 'full_tournament.txt' file results in the fo
 ## Scoring Rules
 Details of tennis scoring can be found online. See here for reference:  
 https://en.wikipedia.org/wiki/Tennis_scoring_system
-The variation used for this application is that used in the Australian Open. 
+The variation used for this application is a best of 3 sets match, with tiebreakers deciding all sets (including the last). 
 A brief summary is as follows:
 * A tennis match is split up into points, games and sets.
 * Winning a game requires a person to win 4 points, but they must be ahead by at least 2 points (deuce, advantage, game)
 * The first player to win 6 games wins a set, but:
     * They must be ahead by 2, unless the set goes to 6 games each, then a tiebreak will be played
     * A tiebreak is a special game which is the first person to get to 7 points, with at least 2 points ahead
-* First to 2 sets (Women's games only) wins.
-* In the deciding set (if the players get to 1 set each), games continue to play as normal without tie breaker until someone wins by 2 games.
+* Best of 3 sets (first to 2 sets wins).
 
