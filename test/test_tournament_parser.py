@@ -14,7 +14,7 @@ class TestTournamentParser(TestCase):
     def setUp(self):
         self.tmp_process_womens_match = match_processor.process_womens_match
         match_processor.process_womens_match = mock.Mock()
-        self.input_file = tempfile.SpooledTemporaryFile(10 ** 9)
+        self.input_file = tempfile.SpooledTemporaryFile(10 ** 9, "w")
 
     def tearDown(self):
         match_processor.process_womens_match = self.tmp_process_womens_match

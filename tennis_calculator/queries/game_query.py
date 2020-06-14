@@ -11,7 +11,7 @@ def query_games(player_name, results):
     games_for = 0
     games_against = 0
 
-    for _, named_match_result in results.iteritems():
+    for _, named_match_result in results.items():
 
         match_result = named_match_result.match_result
 

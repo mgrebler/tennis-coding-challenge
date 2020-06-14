@@ -15,6 +15,7 @@ def main(args):
 def get_tournament_results(args):
     score_file = get_score_file(args)
     tournament_results = parse_tournament(score_file)
+    score_file.close()
     return tournament_results
 
 
@@ -40,11 +41,11 @@ def process_query(line, results):
     match = get_match_id(line)
 
     if player:
-        print query_games(player, results)
+        print(query_games(player, results))
     elif match:
-        print query_match(match, results)
+        print(query_match(match, results))
     else:
-        print "Unrecognised query: %s" % line
+        print("Unrecognised query: %s" % line)
 
 
 def parse_tournament(score_file):
