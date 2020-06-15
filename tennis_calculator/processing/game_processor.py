@@ -1,7 +1,6 @@
 from tennis_calculator.results.results import GameResult
 
 NORMAL_GAME_POINTS = 4
-TIE_BREAK_POINTS = 7
 
 class GameProcessor:
     max_points = 0
@@ -31,13 +30,6 @@ class GameProcessor:
 def process_game(points):
     return process_game.game_processor.process_game(points)
 
-
 process_game.game_processor = GameProcessor(NORMAL_GAME_POINTS)
 
-
-def process_tiebreaker(points):
-    return process_tiebreaker.game_processor.process_game(points)
-
-
-process_tiebreaker.game_processor = GameProcessor(TIE_BREAK_POINTS)
 

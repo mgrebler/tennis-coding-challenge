@@ -12,13 +12,10 @@ class TestSetProcessor(TestCase):
 
     def setUp(self):
         self.tmp_process_game = game_processor.process_game
-        self.tmp_process_tiebreaker = game_processor.process_tiebreaker
         game_processor.process_game = mock.Mock()
-        game_processor.process_tiebreaker = mock.Mock()
 
     def tearDown(self):
         game_processor.process_game = self.tmp_process_game
-        game_processor.process_tiebreaker = self.tmp_process_tiebreaker
 
     def test_p0_wins(self):
 
@@ -56,44 +53,16 @@ class TestSetProcessor(TestCase):
 
         self.assertEqual(expected_game_results, result.game_results)
 
-    def test_7_5_game(self):
+    def test_6_5_game(self):
 
         game_processor.process_game.side_effect = \
-            [P0_GAME] * 5 + [P1_GAME] * 5 + [P0_GAME] * 2
+            [P0_GAME] * 5 + [P1_GAME] * 5 + [P0_GAME]
 
         result, _ = process_set([0])
 
         self.assertEqual(0, result.winner)
-        self.assertEqual(7, result.person_0_games)
-        self.assertEqual(5, result.person_1_games)
-
-
-    def test_tie_break_p0_win(self):
-
-        game_processor.process_game.side_effect = \
-            [P0_GAME] * 5 + [P1_GAME] * 6 + [P0_GAME]
-
-        game_processor.process_tiebreaker.return_value = P0_GAME
-
-        result, _ = process_set([0])
-
-        self.assertEqual(0, result.winner)
-        self.assertEqual(7, result.person_0_games)
-        self.assertEqual(6, result.person_1_games)
-
-    def test_tie_break_p1_win(self):
-
-        game_processor.process_game.side_effect = \
-            [P0_GAME] * 5 + [P1_GAME] * 6 + [P0_GAME]
-
-        game_processor.process_tiebreaker.return_value = P1_GAME
-
-        result, _ = process_set([0])
-
-        self.assertEqual(1, result.winner)
         self.assertEqual(6, result.person_0_games)
-        self.assertEqual(7, result.person_1_games)
-
+        self.assertEqual(5, result.person_1_games)
 
     def test_incomplete_set(self):
 

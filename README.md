@@ -2,6 +2,8 @@
 
 The tennis calculator takes a set of scores as inputs and produces useful statistics based on those scores.
 
+This calculator will used a simplified version of scoring where whoever gets to 6 games first wins the set
+
 ## Overview
 
 The Tennis Calculator takes inputs in the form of a list of points of a tennis match. 
@@ -65,7 +67,7 @@ Example: `Score Match 01`
 Example output:
 
     Person A defeated Person B
-    2 sets to 1
+    2 sets to 0
  
 ### Query games for player
 Prints a summary of games won vs lost for a particular player over the tournament
@@ -75,7 +77,7 @@ Example: `Games Player Person A`
 
 Example output:
 
-    37 56
+    23 17
 
 ## Sample output
 Running the application against the 'full_tournament.txt' file results in the following:
@@ -88,19 +90,21 @@ Running the application against the 'full_tournament.txt' file results in the fo
     Person A defeated Person C
     2 sets to 1
     
-    27 18
+    23 17
     
 
 
 ## Scoring Rules
 Details of tennis scoring can be found online. See here for reference:  
 https://en.wikipedia.org/wiki/Tennis_scoring_system
-The variation used for this application is a best of 3 sets match, with tiebreakers deciding all sets (including the last). 
-A brief summary is as follows:
+
+The variation used for this application is a best of 3 sets match, with first to 6 games wins a set. 
+
+Details as follows:
 * A tennis match is split up into points, games and sets.
 * Winning a game requires a person to win 4 points, but they must be ahead by at least 2 points (deuce, advantage, game)
-* The first player to win 6 games wins a set, but:
-    * They must be ahead by 2, unless the set goes to 6 games each, then a tiebreak will be played
-    * A tiebreak is a special game which is the first person to get to 7 points, with at least 2 points ahead
+* The first player to win 6 games wins a set. I.e:
+    * Players do NOT need to be ahead by 2 to win a set (6-5 finishes a set) 
+    * There is nothing special about that final game in a set. All games are the same.
 * Best of 3 sets (first to 2 sets wins).
 
